@@ -56,4 +56,10 @@ describe PolyTreeNode do
       expect(kevin.grandparent).to eq('Nancy')
     end
   end
+
+  describe "empty nesters" do
+    it "should properly identify people without children" do
+      expect(PolyTreeNode.emptyNesters).to eq('Adam, Joseph, Catherine, Aaron, Samuel, Mary, Robert, Patrick')
+    end
+  end
 end
