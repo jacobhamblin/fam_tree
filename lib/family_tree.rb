@@ -23,6 +23,44 @@ class PolyTreeNode
     @children
   end
 
+
+  def add_child(child)
+    child.parent = self
+  end
+
+  def remove_child(child)
+    if child && !self.children.include?(child)
+      raise "parameter node isn't a child"
+    end
+
+    child.parent = nil
+  end
+
+  def grandparent
+    if self.parent == nil || self.parent.parent == nil
+      return nil
+    end
+
+    self.parent.parent.value
+  end
+
+  def most_grandchildren
+    nodes = [self]
+    grandparents = Hash.new { 0 }
+
+
+    until nodes.empty?
+      node = nodes.shift
+
+      if node.grandparent != nil
+        grandparents[node.grandparent] += 1
+      end
+      nodes.concat(node.children)
+    end
+
+    return grandparents.max_by{|k,v| v}[0]
+  end
+
   def empty_nesters
     nodes = [self]
     empty_nesters = [];
@@ -44,31 +82,11 @@ class PolyTreeNode
 
       if node.parent
         lonely_children << node.value if node.parent.children.length == 1
-      end  
+      end
       nodes.concat(node.children)
     end
 
     return lonely_children.join(', ')
-  end
-
-  def add_child(child)
-    child.parent = self
-  end
-
-  def remove_child(child)
-    if child && !self.children.include?(child)
-      raise "parameter node isn't a child"
-    end
-
-    child.parent = nil
-  end
-
-  def grandparent
-    if self.parent == nil || self.parent.parent == nil
-      raise "grandparent unknown"
-    end
-
-    self.parent.parent.value
   end
 
   protected
