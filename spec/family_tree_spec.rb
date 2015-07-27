@@ -69,4 +69,10 @@ describe PolyTreeNode do
       expect(nancy.lonely_children).to eq('Kevin, Mary')
     end
   end
+
+  describe "most grandchildren" do
+    it "should print the name of the person with the largest number of grand children" do
+      expect(nancy.most_grandchildren).to eq('Jill')
+    end
+  end
 end
