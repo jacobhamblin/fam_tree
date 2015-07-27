@@ -2,46 +2,58 @@ require 'rspec'
 require 'family_tree'
 
 describe PolyTreeNode do
-  let(:Nancy) { PolyTreeNode.new('Nancy') }
-  let(:Jill) { PolyTreeNode.new('Jill') }
-  let(:Adam) { PolyTreeNode.new('Adam') }
-  let(:Carl) { PolyTreeNode.new('Carl') }
-  let(:Kevin) { PolyTreeNode.new('Kevin') }
-  let(:Catherine) { PolyTreeNode.new('Catherine') }
-  let(:Joseph) { PolyTreeNode.new('Joseph') }
-  let(:George) { PolyTreeNode.new('George') }
-  let(:Samuel) { PolyTreeNode.new('Samuel') }
-  let(:James) { PolyTreeNode.new('James') }
-  let(:Aaron) { PolyTreeNode.new('Aaron') }
-  let(:Mary) { PolyTreeNode.new('Mary') }
-  let(:Robert) { PolyTreeNode.new('Robert') }
-  let(:Patrick) { PolyTreeNode.new('Patrick') }
+  let(:nancy) { PolyTreeNode.new('Nancy') }
+  let(:jill) { PolyTreeNode.new('Jill') }
+  let(:adam) { PolyTreeNode.new('Adam') }
+  let(:carl) { PolyTreeNode.new('Carl') }
+  let(:kevin) { PolyTreeNode.new('Kevin') }
+  let(:catherine) { PolyTreeNode.new('Catherine') }
+  let(:joseph) { PolyTreeNode.new('Joseph') }
+  let(:george) { PolyTreeNode.new('George') }
+  let(:samuel) { PolyTreeNode.new('Samuel') }
+  let(:james) { PolyTreeNode.new('James') }
+  let(:aaron) { PolyTreeNode.new('Aaron') }
+  let(:mary) { PolyTreeNode.new('Mary') }
+  let(:robert) { PolyTreeNode.new('Robert') }
+  let(:patrick) { PolyTreeNode.new('Patrick') }
 
-  Nancy.add_child(Adam)
-  Nancy.add_child(Jill)
-  Nancy.add_child(Carl)
-  Jill.add_child(Kevin)
-  Carl.add_child(Catherine)
-  Carl.add_child(Joseph)
-  Kevin.add_child(Samuel)
-  Kevin.add_child(George)
-  Kevin.add_child(James)
-  Kevin.add_child(Aaron)
-  George.add_child(Patrick)
-  George.add_child(Robert)
-  James.add_child(Mary)
+  describe '#add_child' do
+    it "should add children correctly" do
+      nancy.add_child(adam)
+      expect(adam.parent.value).to eq('Nancy')
+    end
+  end
+
+  before do
+    nancy.add_child(jill)
+    nancy.add_child(carl)
+    jill.add_child(kevin)
+    carl.add_child(catherine)
+    carl.add_child(joseph)
+    kevin.add_child(samuel)
+    kevin.add_child(george)
+    kevin.add_child(james)
+    kevin.add_child(aaron)
+    george.add_child(patrick)
+    george.add_child(robert)
+    james.add_child(mary)
+  end
 
   describe "grandparent" do
     it "should identify James' grandparent" do
-      expect(James.grandparent).to eq('Jill')
+      expect(james.grandparent).to eq('Jill')
     end
 
     it "should identify Mary's grandparent" do
-      expect(Mary.grandparent).to eq('Kevin')
+      expect(mary.grandparent).to eq('Kevin')
     end
 
     it "should identify Catherine's grandparent" do
-      expect(Catherine.grandparent).to eq('Nancy')
+      expect(catherine.grandparent).to eq('Nancy')
+    end
+
+    it "should identify Kevin's grandparent" do
+      expect(kevin.grandparent).to eq('Nancy')
     end
   end
 end
