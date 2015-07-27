@@ -1,5 +1,4 @@
 class PolyTreeNode
-
   attr_accessor :value
   attr_reader :parent
 
@@ -22,6 +21,19 @@ class PolyTreeNode
 
   def children
     @children
+  end
+
+  def empty_nesters
+    nodes = [self]
+    empty_nesters = [];
+    until nodes.empty?
+      node = nodes.shift
+
+      empty_nesters << node.value if node.children.length == 0
+      nodes.concat(node.children)
+    end
+
+    return empty_nesters.join(', ') 
   end
 
   def add_child(child)

@@ -25,6 +25,7 @@ describe PolyTreeNode do
   end
 
   before do
+    nancy.add_child(adam)
     nancy.add_child(jill)
     nancy.add_child(carl)
     jill.add_child(kevin)
@@ -59,7 +60,7 @@ describe PolyTreeNode do
 
   describe "empty nesters" do
     it "should properly identify people without children" do
-      expect(PolyTreeNode.emptyNesters).to eq('Adam, Joseph, Catherine, Aaron, Samuel, Mary, Robert, Patrick')
+      expect(nancy.empty_nesters).to eq('Adam, Catherine, Joseph, Samuel, Aaron, Patrick, Robert, Mary')
     end
   end
 end
