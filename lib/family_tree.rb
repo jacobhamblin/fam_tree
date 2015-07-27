@@ -33,7 +33,22 @@ class PolyTreeNode
       nodes.concat(node.children)
     end
 
-    return empty_nesters.join(', ') 
+    return empty_nesters.join(', ')
+  end
+
+  def lonely_children
+    nodes = [self]
+    lonely_children = [];
+    until nodes.empty?
+      node = nodes.shift
+
+      if node.parent
+        lonely_children << node.value if node.parent.children.length == 1
+      end  
+      nodes.concat(node.children)
+    end
+
+    return lonely_children.join(', ')
   end
 
   def add_child(child)

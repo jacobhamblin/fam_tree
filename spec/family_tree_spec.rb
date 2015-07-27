@@ -63,4 +63,10 @@ describe PolyTreeNode do
       expect(nancy.empty_nesters).to eq('Adam, Catherine, Joseph, Samuel, Aaron, Patrick, Robert, Mary')
     end
   end
+
+  describe "lonely children" do
+    it "should properly identify people without siblings" do
+      expect(nancy.lonely_children).to eq('Kevin, Mary')
+    end
+  end
 end
